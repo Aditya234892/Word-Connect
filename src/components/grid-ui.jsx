@@ -52,29 +52,26 @@ const GridUI = forwardRef(function GridUI(
       style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
     >
       {items.map((item) => {
-        const isSelected = selected.includes(item);
-        const className = `bg-white rounded-lg px-2.5 py-2 text-center cursor-pointer shadow-lg text-lg ${
-          isSelected ? "bg-[#797bf4] text-blue-600" : ""
-        } ${
-          isSelected && status
-            ? status === "success"
-              ? "bg-green-200 text-green-600"
-              : status === "failure"
-              ? "bg-red-200 text-red-600"
-              : ""
-            : ""
-        }`;
+  const isSelected = selected.includes(item);
+  const isSuccessful = status === "success" && isSelected;
+  const isFailure = status === "failure" && isSelected;
 
-        return (
-          <button
-            key={item}
-            className={className}
-            onClick={() => markSelection(item)}
-          >
-            {item}
-          </button>
-        );
-      })}
+  const className = `bg-white rounded-lg px-2.5 py-2 text-center cursor-pointer shadow-lg text-lg 
+    ${isSelected && !status ? "bg-indigo-300 text-blue-600" : ""}
+    ${isSuccessful ? "bg-green-300 text-green-800" : ""}
+    ${isFailure ? "bg-red-300 text-red-800" : ""}`;
+
+  return (
+    <button
+      key={item}
+      className={className}
+      onClick={() => markSelection(item)}
+    >
+      {item}
+    </button>
+  );
+})}
+
     </section>
     </>
   );
