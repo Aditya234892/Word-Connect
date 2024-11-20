@@ -49,7 +49,7 @@ const App = () => {
     collapsed
     hideCopyButton={true}
     titleBar={{
-      position: { x: -1230, y: 5 },
+      position: { x: -620, y: 5 },
       filter: false,
       title: "Configure your game",
     }}
@@ -61,7 +61,7 @@ const App = () => {
     }}
   />
 
-  <h3 className="text-center mb-4 font-bold text-3xl sm:text-4xl text-[#130089]">
+  <h3 className="text-center mt-8 mb-10 font-bold text-3xl sm:text-4xl text-[#130089]">
     Fuse the {groupSize} linked words by tapping on their matching pairs.
   </h3>
 

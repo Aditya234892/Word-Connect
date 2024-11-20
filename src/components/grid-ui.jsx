@@ -37,7 +37,7 @@ const GridUI = forwardRef(function GridUI(
 
   return (
     <>
-    {playSound && (
+      {playSound && (
         <ReactHowler
           src={selectSound} // Use the imported sound file here
           playing={playSound} // Control when the sound is playing
@@ -45,34 +45,43 @@ const GridUI = forwardRef(function GridUI(
         />
       )}
 
-    <section
-      className={`grid grid-cols-5 gap-2.5 mx-auto mb-8 ${
-        status === "disabled" ? "cursor-not-allowed" : ""
-      }`}
-      style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
-    >
-      {items.map((item) => {
-  const isSelected = selected.includes(item);
-  const isSuccessful = status === "success" && isSelected;
-  const isFailure = status === "failure" && isSelected;
+      <section
+        className={`grid grid-cols-5 gap-8 mx-auto mb-8 ${
+          status === "disabled" ? "cursor-not-allowed" : ""
+        }`}
+        style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
+      >
+        {items.map((item) => {
+          const isSelected = selected.includes(item);
+          const isSuccessful = status === "success" && isSelected;
+          const isFailure = status === "failure" && isSelected;
 
-  const className = `bg-white rounded-lg px-2.5 py-2 text-center cursor-pointer shadow-lg text-lg 
-    ${isSelected && !status ? "bg-indigo-300 text-blue-600" : ""}
-    ${isSuccessful ? "bg-green-300 text-green-800" : ""}
-    ${isFailure ? "bg-red-300 text-red-800" : ""}`;
+          // Debugging: log the item, selected status, and final class names
+          console.log({
+            item,
+            isSelected,
+            isSuccessful,
+            isFailure,
+            status,
+          });
 
-  return (
-    <button
-      key={item}
-      className={className}
-      onClick={() => markSelection(item)}
-    >
-      {item}
-    </button>
-  );
-})}
+          // Conditional class names based on selection and status
+          const className = `rounded-lg px-2.5 py-2 text-center cursor-pointer shadow-md shadow-indigo-800 text-lg 
+            ${isSelected && !status ? "bg-indigo-200 text-blue-600" : ""} 
+            ${isSuccessful ? "bg-green-300 text-green-800" : ""} 
+            ${isFailure ? "bg-red-300 text-red-800" : ""}`;
 
-    </section>
+          return (
+            <button
+              key={item}
+              className={className}
+              onClick={() => markSelection(item)} // Make sure markSelection updates selected state and status
+            >
+              {item}
+            </button>
+          );
+        })}
+      </section>
     </>
   );
 });
