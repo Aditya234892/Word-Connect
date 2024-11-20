@@ -1,4 +1,4 @@
-import { connectedWords } from './data';
+import { connectedWords } from './Lists';
 
 export function getRandomItems(count, items) {
   const randomItems = [];

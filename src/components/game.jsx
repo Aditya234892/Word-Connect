@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import GridUI from './grid-ui';
-import { areItemsFromSingleGroup } from '../utils/helpers';
+import Btns from './Btns';
+import { areItemsFromSingleGroup } from '../utilities/Calculations';
 import Confetti from 'react-confetti';
 
 const StatusOptions = {
@@ -12,22 +12,20 @@ function Game({ itemGroups, allItems, columns = 2, groupSize }) {
   const [items, setItems] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [status, setStatus] = useState(null);
-  const gridUIRef = useRef(null);
+  const BtnsRef = useRef(null);
 
-  // When items change, reset the game
   useEffect(() => {
     setItems(allItems);
     setAttempts(0);
     setStatus(null);
-    if (gridUIRef.current) {
-      gridUIRef.current.clearSelection();
+    if (BtnsRef.current) {
+      BtnsRef.current.clearSelection();
     }
   }, [allItems]);
 
-  // Take action if items are from the same group on selection completion
   function onSelection(selected) {
     if (selected.length === groupSize) {
-      // If the selection is complete
+    
       setAttempts((prevAttempts) => prevAttempts + 1);
       const newStatus = areItemsFromSingleGroup(itemGroups, selected)
         ? StatusOptions.Success
@@ -39,33 +37,32 @@ function Game({ itemGroups, allItems, columns = 2, groupSize }) {
   }
 
   function unHighlight(itemsForRemoval, currentStatus) {
-    // Remove the items if the selection was successful
     if (currentStatus === StatusOptions.Success) {
       setItems((prevItems) =>
         prevItems.filter((item) => !itemsForRemoval.includes(item))
       );
     }
     setStatus(null);
-    if (gridUIRef.current) {
-      gridUIRef.current.clearSelection();
+    if (BtnsRef.current) {
+      BtnsRef.current.clearSelection();
     }
   }
 
   return (
     <div className=''>
       {items.length ? (
-        <GridUI
+        <Btns
           items={items}
           cols={columns}
           onSelection={onSelection}
           status={status}
-          ref={gridUIRef}
+          ref={BtnsRef}
         />
       ) : (
         <>
         <Confetti
-          width={window.innerWidth} // Full screen width
-          height={window.innerHeight} // Full screen height
+          width={window.innerWidth} 
+          height={window.innerHeight}
         />
       <p className="text-center text-5xl">Well done. Reset to play again!</p>
       </>

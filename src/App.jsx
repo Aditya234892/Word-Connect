@@ -1,9 +1,9 @@
-import { getConnectedGroups } from "./utils/helpers";
+import { getConnectedGroups } from "./utilities/Calculations";
 import { useCallback, useEffect, useState } from "react";
-import Game from "./components/game";
+import Game from "./components/Game";
 import { Leva, useControls } from "leva";
 import ReactHowler from "react-howler";
-import backgroundSound from "./sounds/achievement.mp3"; // Import your background sound file
+import backgroundSound from "./sounds/achievement.mp3"; 
 
 const isSmallScreen = window.innerWidth <= 768;
 
@@ -20,9 +20,8 @@ const App = () => {
 
   const [itemGroups, setItemsGroup] = useState([]);
   const [allItems, setAllItems] = useState([]);
-  const [playSound, setPlaySound] = useState(true); // Manage sound playback state
-  const [soundRef, setSoundRef] = useState(null); // Store the sound instance
-
+  const [playSound, setPlaySound] = useState(true); 
+  const [soundRef, setSoundRef] = useState(null); 
   const reset = useCallback(() => {
     const [newItemGroups, newAllItems] = getConnectedGroups(
       itemCount,
@@ -38,11 +37,11 @@ const App = () => {
     <div className="bg-gradient-to-br from-[#40ffe9] to-[#130089] flex flex-col p-6 sm:p-10 min-h-screen">
   {/* Background sound */}
   <ReactHowler
-    src={backgroundSound} // Your imported sound file
-    playing={playSound} // Control playback state
-    loop={true} // Ensure the sound plays continuously
-    volume={0.5} // Adjust volume as needed
-    ref={(ref) => setSoundRef(ref)} // Store the instance for control
+    src={backgroundSound} 
+    playing={playSound}
+    loop={true}
+    volume={0.5} 
+    ref={(ref) => setSoundRef(ref)}
   />
 
 <Leva
@@ -89,7 +88,7 @@ const App = () => {
       className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700"
       onClick={() => {
         if (soundRef) {
-          setPlaySound(!playSound); // Toggle play state
+          setPlaySound(!playSound);
         }
       }}
     >
