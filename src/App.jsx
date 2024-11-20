@@ -45,21 +45,23 @@ const App = () => {
     ref={(ref) => setSoundRef(ref)} // Store the instance for control
   />
 
-  <Leva
-    collapsed
-    hideCopyButton={true}
-    titleBar={{
-      position: { x: -620, y: 5 },
-      filter: false,
-      title: "Configure your game",
-    }}
-    theme={{
-      colors: {
-        highlight1: "white",
-        highlight2: "white",
-      },
-    }}
-  />
+<Leva
+  collapsed
+  hideCopyButton={true}
+  titleBar={{
+    position: { x: -620, y: 5 },
+    filter: false,
+    title: "Configure your game",
+  }}
+  theme={{
+    colors: {
+      highlight1: "white",
+      highlight2: "white",
+    },
+  }}
+  className="responsive-leva"
+/>
+
 
   <h3 className="text-center mt-8 mb-10 font-bold text-3xl sm:text-4xl text-[#130089]">
     Fuse the {groupSize} linked words by tapping on their matching pairs.
